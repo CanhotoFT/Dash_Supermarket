@@ -2,6 +2,16 @@ import streamlit as st
 import pandas as pd 
 import plotly.express as px
 
+st.set_page_config(layout="wide")
+
+#visão mensal
+#faturamento por unidade
+#tipo de produto mais vendido,contribuição por filial
+#desempenho das formas de pagamento
+#como estão as avaliações das filiais
 
 df = pd.read_csv("supermarket_sales.csv", sep=";", decimal=",")
-df
+df["Date"] = pd.to_datetime(df["Date"])
+df=df.sort_values(df["Date"])
+
+df["Month"] = df["Date"].apply(lambda x: str(x.year) + "-" + str(x.month))
